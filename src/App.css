@@ -1,0 +1,185 @@
+  body {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1rem 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.brand {
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  border-radius: var(--radius-md);
+}
+
+.brand-text {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.nav-link {
+  font-weight: 500;
+  color: var(--color-text-main);
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width var(--transition-normal);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.icon-btn {
+  color: var(--color-text-main);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.icon-btn:hover {
+  transform: translateY(-2px);
+  color: var(--color-primary);
+}
+
+.border-l {
+  border-left: 1px solid var(--color-border);
+}
+
+.pl-4 {
+  padding-left: 1rem;
+}
+
+
+.marketplace {
+  padding: 3rem 1.5rem;
+  /* background-color: whitesmoke; */
+}
+
+.marketplace-header {
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.search-bar {
+  background: white;
+  padding: 0.25rem 1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-input {
+  border: none;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  width: 100%;
+}
+
+.search-input:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.filters {
+  margin-bottom: 3rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.product-image {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.category-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  backdrop-filter: blur(4px);
+}
+
+.product-info {
+  padding: 1.5rem;
+}
+
+.product-info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.farmer-name {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.currency {
+  font-size: 1rem;
+  vertical-align: top;
+  margin-right: 0.1rem;
+}
+
+.unit {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.cart-btn {
+  padding: 0.5rem 1rem;
+}
