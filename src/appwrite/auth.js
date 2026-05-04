@@ -37,19 +37,31 @@ export class AuthService {
     }
  
     async getCurrentUser() {
-        try {
-            return await this.account.get();
-        } catch (error) {
-            console.log("Appwrite service :: getCurrentUser :: error", error);
-        }
-        return null;
+    try {
+        const user = await this.account.get();
+        // Return only plain serializable fields
+        return {
+            $id: user.$id,
+            name: user.name,
+            email: user.email,
+            emailVerification: user.emailVerification,
+            prefs: user.prefs ?? {},
+        };
+    } catch (error) {
+        console.log("Appwrite service :: getCurrentUser :: error", error);
     }
+    return null;
+}
  
     async logout() {
         try {
-            await this.account.deleteSessions();
+            await this.account.get();            // ← throws 401 if no session
+            await this.account.deleteSessions(); // ← only runs if user exists
         } catch (error) {
-            console.log("Appwrite service :: logout :: error", error);
+            if (error?.code !== 401) {
+                console.log("Appwrite service :: logout :: error", error);
+            }
+            // 401 = already logged out, silently ignore
         }
     }
 }

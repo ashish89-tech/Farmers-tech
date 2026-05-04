@@ -4,6 +4,8 @@ import { Container,PostCard } from '../components'
 import { Link } from 'react-router-dom';
 import { ArrowRight, Leaf, TrendingUp, ShieldCheck } from 'lucide-react';
 import './Home.css'
+
+
 function Home() {
     const [posts, setPosts] = useState([])
 
@@ -14,22 +16,24 @@ function Home() {
             }
         })
     }, [])
+
+     
   
-    if (posts.length === 0) {
-        return (
-            <div className="w-full py-8 mt-4 text-center">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read posts
-                            </h1>
-                        </div>
-                    </div>
-                </Container>
-            </div>
-        )
-    }
+    // if (posts.length === 0) {
+    //     return (
+    //         <div className="w-full py-8 mt-4 text-center">
+    //             <Container>
+    //                 <div className="flex flex-wrap">
+    //                     <div className="p-2 w-full">
+    //                         <h1 className="text-2xl font-bold hover:text-gray-500">
+    //                             Login to read posts
+    //                         </h1>
+    //                     </div>
+    //                 </div>
+    //             </Container>
+    //         </div>
+    //     )
+    // }
     return (
         // <div className='w-full py-8'>
         //     <Container>
@@ -42,6 +46,7 @@ function Home() {
         //         </div>
         //     </Container>
         //  </div>
+        
          <div className="home   bg-[#FAFAF8] min-h-screen">
       {/* Hero Section */}
       <section className="hero">

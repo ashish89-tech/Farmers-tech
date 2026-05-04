@@ -13,7 +13,7 @@ function AllPosts() {
   return (
     <div className='w-full py-8 bg-[#FAFAF8] min-h-screen'>
        
-          <h1 className="text-2xl md:text-3xl font-bold  ">
+          <h1 className="text-2xl md:text-3xl font-bold ml-10 mb-5 ">
           Fresh Produce Marketplace
         </h1>
          
