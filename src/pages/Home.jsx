@@ -35,33 +35,21 @@ function Home() {
     //     )
     // }
     return (
-        // <div className='w-full py-8'>
-        //     <Container>
-        //         <div className='flex flex-wrap'>
-        //             {posts.map((post) => (
-        //                 <div key={post.$id} className='p-2 w-1/4'>
-        //                     <PostCard {...post} />
-        //                 </div>
-        //             ))}
-        //         </div>
-        //     </Container>
-        //  </div>
-        
          <div className="home   bg-[#FAFAF8] min-h-screen">
       {/* Hero Section */}
       <section className="hero">
         <div className="container">
-          <div className="hero-content animate-fade-in-up ">
+          <div className="hero-content animate-fade-in-up mt-8 md:mt-0">
             <h1 className="hero-title ">Fresh from the Farm,<br/>Direct to Your Table.</h1>
             <p className="hero-subtitle">
               Skip the middlemen. Farmers get higher profits, and you get the freshest produce at better prices.
             </p>
-            <div className="hero-actions flex gap-4 mt-8">
-              <Link to="/all-posts" className="btn btn-primary">
+            <div className="hero-actions flex flex-col sm:flex-row gap-4 mt-8">
+              <Link to="/all-posts" className="btn btn-primary w-full sm:w-auto">
                 Shop Fresh Produce
                 <ArrowRight size={18} />
               </Link>
-              <Link to="/DashBoard" className="btn btn-outline" style={{ backgroundColor: 'white' }}>
+              <Link to="/DashBoard" className="btn btn-outline w-full sm:w-auto" style={{ backgroundColor: 'white' }}>
                 I am a Farmer
               </Link>
             </div>
@@ -70,8 +58,8 @@ function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="features container" style={{ padding: '5rem 1.5rem' }}>
-        <h2 className="text-center" style={{ fontSize: '2.5rem', marginBottom: '3rem' }}>Why Choose FarmDirect?</h2>
+      <section className="features container py-12 md:py-20 px-6">
+        <h2 className="text-center text-3xl md:text-5xl font-serif text-primary mb-8 md:mb-12">Why Choose FarmDirect?</h2>
         <div className="features-grid">
           <div className="feature-card glass">
             <div className="feature-icon"><TrendingUp size={32} color="var(--color-primary)" /></div>

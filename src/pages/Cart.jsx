@@ -129,11 +129,10 @@ const Cart = () => {
 
         <div style={{ flex: "1 1 300px" }}>
           <div
-            className="glass animate-fade-in-up"
+            className="glass animate-fade-in-up md:sticky"
             style={{
               borderRadius: "var(--radius-lg)",
               padding: "2rem",
-              position: "sticky",
               top: "100px",
               animationDelay: "0.1s",
             }}

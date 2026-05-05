@@ -9,7 +9,7 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
-  max-width: 340px;
+  max-width: 100%;
   font-family: 'Outfit', sans-serif;
 }
 
