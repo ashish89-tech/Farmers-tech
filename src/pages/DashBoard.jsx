@@ -1,26 +1,22 @@
-
-
-
 import React, { useEffect, useState } from "react";
 import { PlusCircle, Package, IndianRupee, TrendingUp } from "lucide-react";
 import "./DashBoard.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import service from "../appwrite/config.js"; // adjust path if needed
+import service from "../appwrite/config.js";
 
-const DashBoard = ({category,price}) => {
-  const navigate = useNavigate();
-  const userData = useSelector((state) => state.auth.userData);
-  const [posts, setPosts] = useState([]);
+const DashBoard = () => {
+  const navigate  = useNavigate();
+  const userData  = useSelector((state) => state.auth.userData);
+  const [posts, setPosts]     = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (userData?.$id) {
       service
-        .getPosts([]) // get all posts
+        .getPosts([])
         .then((res) => {
           if (res) {
-            // filter only this user's posts
             const myPosts = res.documents.filter(
               (post) => post.userId === userData.$id
             );
@@ -30,97 +26,80 @@ const DashBoard = ({category,price}) => {
         .finally(() => setLoading(false));
     }
   }, [userData]);
+
   const totalRevenue = posts.reduce((acc, post) => acc + (post.price || 0), 0);
 
   return (
-    <div className="dashboard container">
-      <div className="dashboard-header flex items-center justify-between">
-        <div>
-          <h1>Farmer Dashboard</h1>
-          <p className="text-muted text-lg text-gray-600 mt-2">
-            Welcome back, {userData?.name || "Farmer"}
-          </p>
-        </div>
+    <div className="dashboard-root">
 
-        <button
-          className="btn btn-primary"
-          onClick={() => navigate("/add-post")}
-        >
-          <PlusCircle size={20} />
-          Add New Product
-        </button>
-      </div>
-
-      <div className="stats-grid">
-        <div
-          className="stat-card glass animate-fade-in-up"
-          style={{ animationDelay: "0.1s" }}
-        >
-          <div
-            className="stat-icon"
-            style={{
-              backgroundColor: "rgba(44, 95, 45, 0.1)",
-              color: "var(--color-primary)",
-            }}
-          >
-            <IndianRupee size={24} />
-           
-          </div>
-          <div className="stat-info">
-            <p className="stat-label">Total Revenue</p>
-            <h3 className="stat-value">₹{totalRevenue.toFixed(2)}</h3>
-          </div>
-        </div>
-
-        <div
-          className="stat-card glass animate-fade-in-up"
-          style={{ animationDelay: "0.2s" }}
-        >
-          <div
-            className="stat-icon"
-            style={{
-              backgroundColor: "rgba(151, 188, 98, 0.2)",
-              color: "var(--color-accent)",
-            }}
-          >
-            <Package size={24} />
-          </div>
-          <div className="stat-info">
-            <p className="stat-label">Active Listings</p>
-            <h3 className="stat-value">{posts.length}</h3>
-          </div>
-        </div>
-
-        <div
-          className="stat-card glass animate-fade-in-up"
-          style={{ animationDelay: "0.3s" }}
-        >
-          <div
-            className="stat-icon"
-            style={{
-              backgroundColor: "rgba(166, 123, 91, 0.2)",
-              color: "var(--color-earth)",
-            }}
-          >
-            <TrendingUp size={24} />
-          </div>
-          <div className="stat-info">
-            <p className="stat-label">Estimated Extra Profit</p>
-            <h3 className="stat-value text-primary">+42%</h3>
-            <p style={{ fontSize: "0.8rem", color: "var(--color-text-muted)" }}>
-              vs wholesale
+      {/* ── Hero Header ── */}
+      <div className="db-hero">
+        <div className="db-hero-inner">
+          <div>
+            <div className="db-eyebrow">
+              <span className="db-eyebrow-dot" />
+              Farmer Portal
+            </div>
+            <h1 className="db-title">
+              Farmer <span>Dashboard</span>
+            </h1>
+            <p className="db-welcome">
+              Welcome back, {userData?.name || "Farmer"} 👋
             </p>
           </div>
+          <button
+            className="db-add-btn"
+            onClick={() => navigate("/add-post")}
+          >
+            <PlusCircle size={18} />
+            Add New Product
+          </button>
         </div>
       </div>
 
-      <div className="inventory-section">
-        <h2 style={{ marginBottom: "1.5rem" }}>Your Inventory</h2>
-        <div
-          className="table-responsive glass"
-          style={{ borderRadius: "var(--radius-lg)", overflow: "hidden" }}
-        >
-          <table className="inventory-table">
+      <div className="db-body">
+
+        {/* ── Stat Cards ── */}
+        <div className="db-stats">
+          <div className="db-stat-card">
+            <div className="db-stat-icon revenue">
+              <IndianRupee size={24} />
+            </div>
+            <div>
+              <div className="db-stat-label">Total Revenue</div>
+              <div className="db-stat-value">₹{totalRevenue.toFixed(2)}</div>
+              <div className="db-stat-sub">from all listings</div>
+            </div>
+          </div>
+
+          <div className="db-stat-card">
+            <div className="db-stat-icon listings">
+              <Package size={24} />
+            </div>
+            <div>
+              <div className="db-stat-label">Active Listings</div>
+              <div className="db-stat-value">{posts.length}</div>
+              <div className="db-stat-sub">products on market</div>
+            </div>
+          </div>
+
+          <div className="db-stat-card">
+            <div className="db-stat-icon profit">
+              <TrendingUp size={24} />
+            </div>
+            <div>
+              <div className="db-stat-label">Estimated Extra Profit</div>
+              <div className="db-stat-value">+42%</div>
+              <div className="db-stat-sub">vs wholesale middlemen</div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Inventory Table ── */}
+        <div className="db-section-label">Your Inventory</div>
+
+        <div className="db-table-wrap">
+          <table className="db-table">
             <thead>
               <tr>
                 <th>Product</th>
@@ -133,52 +112,53 @@ const DashBoard = ({category,price}) => {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="5" style={{ textAlign: "center", padding: "2rem" }}>
-                    Loading...
+                  <td colSpan="5">
+                    <div className="db-empty">
+                      <div className="db-empty-icon">🌾</div>
+                      Loading your products…
+                    </div>
                   </td>
                 </tr>
               ) : posts.length === 0 ? (
                 <tr>
-                  <td
-                    colSpan="5"
-                    style={{
-                      textAlign: "center",
-                      padding: "2rem",
-                      color: "var(--color-text-muted)",
-                    }}
-                  >
-                    No products yet. Click "Add New Product" to get started.
+                  <td colSpan="5">
+                    <div className="db-empty">
+                      <div className="db-empty-icon">🌱</div>
+                      No products yet. Click "Add New Product" to get started.
+                    </div>
                   </td>
                 </tr>
               ) : (
                 posts.map((post) => (
                   <tr key={post.$id}>
                     <td>
-                      <div className="flex items-center gap-4">
+                      <div className="db-product-cell">
                         {post.feturedImage && (
                           <img
                             src={service.getFilePreview(post.feturedImage)}
                             alt={post.title}
-                            className="table-img"
+                            className="db-product-img"
                           />
                         )}
-                        <span style={{ fontWeight: 500 }}>{post.title}</span>
+                        <span className="db-product-name">{post.title}</span>
                       </div>
                     </td>
-                    <td>{post.category}</td>
-                    <td>{ `₹${post.price}`}</td>
                     <td>
-                      <span className={`status-badge ${post.status}`}>
+                      <span className="db-cat-pill">
+                        {post.category || "—"}
+                      </span>
+                    </td>
+                    <td>
+                      <span className="db-price">₹{post.price}</span>
+                    </td>
+                    <td>
+                      <span className={`db-status ${post.status}`}>
                         {post.status}
                       </span>
                     </td>
                     <td>
                       <button
-                        className="btn btn-outline"
-                        style={{
-                          padding: "0.25rem 0.75rem",
-                          fontSize: "0.9rem",
-                        }}
+                        className="db-edit-btn"
                         onClick={() => navigate(`/edit-post/${post.$id}`)}
                       >
                         Edit

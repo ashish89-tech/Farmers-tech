@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap');
+ 
+/* ── Page ── */
+.post-page {
+  min-height: 100vh;
+  background: #f5f0e8;
+  font-family: 'Nunito', sans-serif;
+}
+ 
+/* ── Hero Image ── */
+.post-hero {
+  position: relative;
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  border-radius: 0 0 40px 40px;
+  box-shadow: 0 12px 48px rgba(200, 112, 58, 0.18);
+}
+ 
+.post-hero-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+ 
+.post-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 10, 4, 0.18) 0%,
+    rgba(20, 10, 4, 0.62) 100%
+  );
+}
+ 
+/* ── Hero Buttons ── */
+.post-back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 248, 240, 0.88);
+  color: #2c1a0e;
+  border: 1.5px solid rgba(200, 112, 58, 0.3);
+  border-radius: 100px;
+  padding: 7px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.post-back-btn:hover {
+  background: rgba(255, 248, 240, 1);
+}
+ 
+.post-author-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+ 
+.post-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.post-edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.45);
+}
+ 
+.post-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.post-delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.45);
+}
+ 
+/* ── Main Content Wrapper ── */
+.post-content-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 40px 16px 60px;
+}
+ 
+/* ── Info Card ── */
+.post-card {
+  background: #fff8f0;
+  border-radius: 24px;
+  border: 1.5px solid #e8d9c0;
+  box-shadow: 0 8px 40px rgba(200, 112, 58, 0.10);
+  padding: 32px 36px;
+  margin-bottom: 24px;
+}
+ 
+/* ── Eyebrow pill ── */
+.post-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(200, 112, 58, 0.10);
+  border: 1.5px solid rgba(200, 112, 58, 0.25);
+  border-radius: 100px;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a85520;
+  margin-bottom: 14px;
+  font-family: 'Nunito', sans-serif;
+}
+ 
+.post-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c8703a;
+  animation: pulse 2s infinite;
+}
+ 
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+ 
+/* ── Fresh badge ── */
+.post-fresh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1.5px solid rgba(34, 197, 94, 0.3);
+  border-radius: 100px;
+  padding: 4px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #166534;
+  font-family: 'Nunito', sans-serif;
+  margin-bottom: 18px;
+}
+ 
+/* ── Star rating row ── */
+.post-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+ 
+.post-rating-label {
+  font-size: 13px;
+  color: #8a6a52;
+  margin-left: 6px;
+  font-family: 'Nunito', sans-serif;
+}
+ 
+/* ── Title ── */
+.post-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: #1e0e05;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+ 
+/* ── Meta pills row ── */
+.post-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+ 
+.post-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+.post-meta-pill.orange {
+  background: rgba(200, 112, 58, 0.10);
+  border: 1.5px solid rgba(200, 112, 58, 0.28);
+  color: #a85520;
+}
+.post-meta-pill.green {
+  background: rgba(34, 197, 94, 0.10);
+  border: 1.5px solid rgba(34, 197, 94, 0.28);
+  color: #166534;
+}
+ 
+/* ── Divider ── */
+.post-divider {
+  border: none;
+  border-top: 1.5px solid #e8d9c0;
+  margin: 24px 0;
+}
+ 
+/* ── Body content ── */
+.post-body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  color: #4a3020;
+  line-height: 1.8;
+}
+ 
+/* ── Add to Cart button ── */
+.post-cart-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+ 
+.post-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #c8703a 0%, #e8955a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 15px 36px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(200, 112, 58, 0.40);
+  letter-spacing: 0.02em;
+  width: 100%;
+  max-width: 360px;
+  transition: transform 0.18s, box-shadow 0.18s, background 0.3s;
+}
+.post-cart-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(200, 112, 58, 0.52);
+}
+.post-cart-btn.added {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  box-shadow: 0 8px 28px rgba(34, 197, 94, 0.40);
+}
+ 
+/* ── Trust strip card ── */
+.post-trust-card {
+  background: #fff8f0;
+  border-radius: 24px;
+  border: 1.5px solid #e8d9c0;
+  box-shadow: 0 8px 40px rgba(200, 112, 58, 0.10);
+  padding: 28px 36px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  text-align: center;
+}
+ 
+.post-trust-item-icon {
+  font-size: 30px;
+  margin-bottom: 6px;
+}
+ 
+.post-trust-item-label {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #1e0e05;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+ 
+.post-trust-item-sub {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  color: #8a6a52;
+}
+ 
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .post-card,
+  .post-trust-card {
+    padding: 22px 18px;
+  }
+  .post-hero-img {
+    height: 300px;
+  }
+  .post-hero {
+    border-radius: 0 0 24px 24px;
+  }
+}

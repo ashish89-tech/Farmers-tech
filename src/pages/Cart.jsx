@@ -1,17 +1,21 @@
 import React from "react";
 import { Trash2, CreditCard } from "lucide-react";
-import { useSelector, useDispatch } from "react-redux"; 
-import { removeFromCart, incrementQuantity, decrementQuantity } from "../store/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} from "../store/cartSlice";
 import appwriteService from "../appwrite/config";
 
 const Cart = () => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
   const subtotal = cartItems.reduce(
-  (acc, item) => acc + (Number(item.price) || 0) * (item.quantity || 1),
-  0
-);
+    (acc, item) => acc + (Number(item.price) || 0) * (item.quantity || 1),
+    0,
+  );
   const fee = subtotal * 0.05;
   const total = subtotal + fee;
 
@@ -54,7 +58,11 @@ const Cart = () => {
                 >
                   <div className="flex items-center gap-4">
                     <img
-                      src={appwriteService.getFilePreview(item.feturedImage)} // ✅ convert fileId to URL
+                      src={
+                        item.feturedImage
+                          ? appwriteService.getFilePreview(item.feturedImage)
+                          : item.image
+                      }
                       alt={item.title}
                       style={{
                         width: "80px",
@@ -67,7 +75,7 @@ const Cart = () => {
                       <h3
                         style={{ fontSize: "1.2rem", marginBottom: "0.25rem" }}
                       >
-                        {item.title} 
+                        {item.title}
                       </h3>
                       <p className="text-muted" style={{ fontSize: "0.9rem" }}>
                         {item.farmName}
@@ -79,7 +87,7 @@ const Cart = () => {
                           marginTop: "0.5rem",
                         }}
                       >
-                        ₹{item.price} / {item.category} 
+                        ₹{item.price} / {item.category}
                       </p>
                     </div>
                   </div>
@@ -88,7 +96,7 @@ const Cart = () => {
                       <button
                         className="btn btn-outline"
                         style={{ padding: "0.25rem 0.5rem" }}
-                        onClick={()=>dispatch(decrementQuantity(item.$id))}
+                        onClick={() => dispatch(decrementQuantity(item.$id))}
                       >
                         -
                       </button>
@@ -104,13 +112,13 @@ const Cart = () => {
                       <button
                         className="btn btn-outline"
                         style={{ padding: "0.25rem 0.5rem" }}
-                        onClick={()=>dispatch(incrementQuantity(item.$id))}
+                        onClick={() => dispatch(incrementQuantity(item.$id))}
                       >
                         +
                       </button>
                     </div>
                     <button
-                      onClick={() => dispatch(removeFromCart(item.$id))} 
+                      onClick={() => dispatch(removeFromCart(item.$id))}
                       style={{
                         background: "none",
                         border: "none",
@@ -145,7 +153,7 @@ const Cart = () => {
               style={{ marginBottom: "1rem", color: "var(--color-text-muted)" }}
             >
               <span>Subtotal</span>
-              <span>₹{subtotal.toFixed(2)}</span> 
+              <span>₹{subtotal.toFixed(2)}</span>
             </div>
             <div
               className="flex justify-between"
@@ -155,7 +163,7 @@ const Cart = () => {
               }}
             >
               <span>Platform Fee (5%)</span>
-              <span>₹{fee.toFixed(2)}</span> 
+              <span>₹{fee.toFixed(2)}</span>
             </div>
             <div
               className="flex justify-between"
@@ -169,7 +177,6 @@ const Cart = () => {
             >
               <span>Total</span>
               <span className="text-primary">₹{total.toFixed(2)}</span>{" "}
-              
             </div>
             <button
               className="btn btn-primary"

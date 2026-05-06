@@ -24,7 +24,7 @@ function Header() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className="navbar glass sticky top-0 z-50">
+    <header className="navbar glass sticky top-0 z-50" style={{ background: "#fcdfcb" }}>
       <Container>
         <div className="container flex items-center justify-between py-4">
           <Link to="/" className="brand flex items-center gap-2">

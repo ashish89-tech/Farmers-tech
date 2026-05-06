@@ -6,75 +6,64 @@ import "./PostCard.css";
 import { addToCart } from "../store/cartSlice";
 import { useDispatch } from "react-redux";
 
-function PostCard({
-  $id,
-  title,
-  content,
-  feturedImage,
-  farmName,
-  price,
-  category,
-}) {
-  const navigate=useNavigate()
+function PostCard({ $id, title, content, feturedImage, farmName, price, category, image }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   return (
-    <Link to={`/post/${$id}`} className="link">
-      <div className="card">
-        {/* Image */}
-        <div className="imageWrapper">
-          <span className="category-badge">{category}</span>
-          {feturedImage ? (
+    <Link to={`/post/${$id}`} className="pc-link">
+      <div className="pc-card">
+
+        {/* ── Image ── */}
+        <div className="pc-image-wrapper">
+          {category && (
+            <span className="pc-category-badge">{category}</span>
+          )}
+
+          {image ? (
+            <img src={image} alt={title} className="pc-image" />
+          ) : feturedImage ? (
             <img
               src={appwriteService.getFilePreview(feturedImage)}
               alt={title}
-              className="image"
+              className="pc-image"
             />
           ) : (
-            <div className="noImage">No Image</div>
+            <div className="pc-no-image">No Image</div>
           )}
 
-          {/* Price badge */}
-          <div className="priceBadge">
+          <div className="pc-price-badge">
             ₹{price}
-            <span className="priceUnit">/box</span>
+            <span className="pc-price-unit">/box</span>
           </div>
         </div>
 
-        {/* Content */}
-        <div className="content">
-          <h2 className="title">{title}</h2>
-          <p className="farmName">{farmName}</p>
+        {/* ── Content ── */}
+        <div className="pc-content">
+          <h2 className="pc-title">{title}</h2>
+          <p className="pc-farm-name">{farmName}</p>
           <div
-            className="description"
+            className="pc-description"
             dangerouslySetInnerHTML={{ __html: content }}
           />
 
-          {/* Footer */}
-          <div className="footer">
-            <span className="tag">Farm Direct</span>
+          {/* ── Footer ── */}
+          <div className="pc-footer">
+            <span className="pc-tag">Farm Direct</span>
             <button
-              className="cartBtn"
+              className="pc-cart-btn"
               onClick={(e) => {
                 e.preventDefault();
-                dispatch(
-                  addToCart(
-                    {$id,
-                    title,
-                    content,
-                    feturedImage,
-                    farmName,
-                    price,
-                    category,}
-                  ),
-                );
-                navigate("/cart")
+                dispatch(addToCart({ $id, title, content, feturedImage, farmName, price, category, image }));
+                navigate("/cart");
               }}
             >
-              <ShoppingCart size={15} />
+              <ShoppingCart size={14} />
               Add
             </button>
           </div>
         </div>
+
       </div>
     </Link>
   );

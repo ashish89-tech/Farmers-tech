@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Mono:wght@400;500&family=Nunito:wght@400;600;700&display=swap');
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ── Root ── */
+.ap-root {
+  min-height: 100vh;
+  background: #f5f0e8;
+  font-family: 'Nunito', sans-serif;
+  color: #2c1a0e;
+  padding-bottom: 80px;
+}
+
+/* ── Hero ── */
+.ap-hero {
+  background:
+    linear-gradient(135deg, rgba(200,112,58,0.12) 0%, rgba(180,130,80,0.08) 100%),
+    #fdf6ec;
+  padding: 52px 32px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1.5px solid #e8d9c0;
+}
+
+.ap-hero::before {
+  content: '🌾';
+  position: absolute;
+  font-size: 220px;
+  opacity: 0.06;
+  top: -20px;
+  right: -10px;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.ap-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #c8703a, #e8a87a, #c8703a);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Eyebrow ── */
+.ap-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(200, 112, 58, 0.1);
+  border: 1.5px solid rgba(200, 112, 58, 0.3);
+  border-radius: 100px;
+  padding: 5px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a85520;
+  margin-bottom: 16px;
+  animation: fadeUp 0.5s ease both;
+}
+
+.ap-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c8703a;
+  animation: pulse 2s infinite;
+}
+
+/* ── Title ── */
+.ap-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 5vw, 56px);
+  font-weight: 900;
+  line-height: 1.05;
+  color: #1e0e05;
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+.ap-title span {
+  background: linear-gradient(135deg, #c8703a, #e8955a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ap-sub {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #8a6a52;
+  animation: fadeUp 0.5s 0.15s ease both;
+}
+
+/* ── Category pills ── */
+.ap-cats {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  animation: fadeUp 0.5s 0.2s ease both;
+  position: relative;
+  z-index: 1;
+}
+
+.ap-cat {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 100px;
+  border: 1.5px solid #ddd0b8;
+  background: #fff8f0;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #7a5540;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(200,112,58,0.06);
+}
+.ap-cat:hover {
+  border-color: #c8703a;
+  color: #a85520;
+  background: #fff3e8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(200,112,58,0.12);
+}
+.ap-cat.active {
+  background: linear-gradient(135deg, #c8703a, #d9844f);
+  border-color: #c8703a;
+  color: #fff8f0;
+  box-shadow: 0 4px 16px rgba(200,112,58,0.3);
+}
+.ap-cat.active .ap-cat-count {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+.ap-cat-icon {
+  font-size: 15px;
+}
+
+.ap-cat-count {
+  font-size: 11px;
+  background: rgba(200, 112, 58, 0.1);
+  color: #c8703a;
+  border-radius: 100px;
+  padding: 2px 8px;
+  transition: all 0.2s;
+}
+
+/* ── Body ── */
+.ap-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 24px 0;
+  animation: fadeUp 0.5s 0.3s ease both;
+}
+
+.ap-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b09070;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ap-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(90deg, #e8d9c0, transparent);
+}
+
+/* ── Grid ── */
+.ap-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ── Empty state ── */
+.ap-empty {
+  text-align: center;
+  padding: 80px 20px;
+  font-size: 15px;
+  color: #b09070;
+  grid-column: 1 / -1;
+}
+.ap-empty-icon {
+  font-size: 48px;
+  opacity: 0.5;
+  margin-bottom: 12px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .ap-hero { padding: 36px 16px 32px; }
+  .ap-body { padding: 24px 12px 0; }
+  .ap-cat  { padding: 8px 14px; font-size: 12px; }
+}
