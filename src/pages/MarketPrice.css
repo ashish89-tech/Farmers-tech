@@ -405,3 +405,13 @@
   .mkt-stats { gap: 16px; }
   .mkt-stat-sep { display: none; }
 }
+
+.view-more-btn{
+  padding:10px 20px;
+  border:none;
+  background:#2e7d32;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:20px;
+}

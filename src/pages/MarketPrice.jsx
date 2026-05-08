@@ -2,16 +2,38 @@ import React, { useEffect, useState } from "react";
 import "./MarketPrice.css";
 
 const priorityStates = [
-  "Jharkhand", "Bihar", "West Bengal",
-  "Odisha", "Chhattisgarh", "Uttar Pradesh",
+  "Jharkhand",
+  "Bihar",
+  "West Bengal",
+  "Odisha",
+  "Chhattisgarh",
+  "Uttar Pradesh",
 ];
 
 const CROP_EMOJI = {
-  rice: "🌾", wheat: "🌽", onion: "🧅", tomato: "🍅", potato: "🥔",
-  garlic: "🧄", ginger: "🫚", banana: "🍌", mango: "🥭", apple: "🍎",
-  lemon: "🍋", orange: "🍊", maize: "🌽", soyabean: "🫘", cotton: "🪴",
-  groundnut: "🥜", mustard: "🌿", sugarcane: "🎋", chilli: "🌶️",
-  cabbage: "🥬", cauliflower: "🥦", brinjal: "🍆", pea: "🫛",
+  rice: "🌾",
+  wheat: "🌽",
+  onion: "🧅",
+  tomato: "🍅",
+  potato: "🥔",
+  garlic: "🧄",
+  ginger: "🫚",
+  banana: "🍌",
+  mango: "🥭",
+  apple: "🍎",
+  lemon: "🍋",
+  orange: "🍊",
+  maize: "🌽",
+  soyabean: "🫘",
+  cotton: "🪴",
+  groundnut: "🥜",
+  mustard: "🌿",
+  sugarcane: "🎋",
+  chilli: "🌶️",
+  cabbage: "🥬",
+  cauliflower: "🥦",
+  brinjal: "🍆",
+  pea: "🫛",
 };
 
 function getCropEmoji(name = "") {
@@ -34,10 +56,11 @@ const SkeletonRows = () =>
   ));
 
 const MarketTable = () => {
-  const [data, setData]         = useState([]);
-  const [loading, setLoading]   = useState(true);
-  const [state, setState]       = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [state, setState] = useState("");
   const [district, setDistrict] = useState("");
+  const [visible, setVisible] = useState(10);
 
   const API =
     "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070" +
@@ -62,26 +85,25 @@ const MarketTable = () => {
 
   const districts = [
     ...new Set(
-      data.filter((item) => item.state === state).map((item) => item.district)
+      data.filter((item) => item.state === state).map((item) => item.district),
     ),
   ];
 
   const filteredData = data.filter(
     (item) =>
-      (!state    || item.state    === state) &&
-      (!district || item.district === district)
+      (!state || item.state === state) &&
+      (!district || item.district === district),
   );
 
   const avgPrice = filteredData.length
     ? Math.round(
         filteredData.reduce((s, r) => s + Number(r.modal_price), 0) /
-          filteredData.length
+          filteredData.length,
       )
     : 0;
 
   return (
     <div className="mkt-root">
-
       {/* ── Hero ── */}
       <div className="mkt-hero">
         <div className="mkt-eyebrow">
@@ -134,11 +156,16 @@ const MarketTable = () => {
             <select
               className="mkt-select"
               value={state}
-              onChange={(e) => { setState(e.target.value); setDistrict(""); }}
+              onChange={(e) => {
+                setState(e.target.value);
+                setDistrict("");
+              }}
             >
               <option value="">All States</option>
               {sortedStates.map((s, i) => (
-                <option key={i} value={s}>{s}</option>
+                <option key={i} value={s}>
+                  {s}
+                </option>
               ))}
             </select>
           </div>
@@ -152,7 +179,9 @@ const MarketTable = () => {
             >
               <option value="">All Districts</option>
               {districts.map((d, i) => (
-                <option key={i} value={d}>{d}</option>
+                <option key={i} value={d}>
+                  {d}
+                </option>
               ))}
             </select>
           </div>
@@ -192,58 +221,77 @@ const MarketTable = () => {
                   </td>
                 </tr>
               ) : (
-                filteredData.map((item, i) => (
-                  <tr
-                    key={i}
-                    style={{ animationDelay: `${Math.min(i * 20, 500)}ms` }}
-                  >
-                    <td>
-                      <div className="mkt-crop">
-                        <div className="mkt-crop-icon">
-                          {getCropEmoji(item.commodity)}
-                        </div>
-                        <div>
-                          <div className="mkt-crop-name">{item.commodity}</div>
-                          <div className="mkt-crop-meta">
-                            {item.variety} · {item.grade}
+                <>
+                  {filteredData.slice(0, visible).map((item, i) => (
+                    <tr
+                      key={i}
+                      style={{ animationDelay: `${Math.min(i * 20, 500)}ms` }}
+                    >
+                      <td>
+                        <div className="mkt-crop">
+                          <div className="mkt-crop-icon">
+                            {getCropEmoji(item.commodity)}
+                          </div>
+                          <div>
+                            <div className="mkt-crop-name">
+                              {item.commodity}
+                            </div>
+                            <div className="mkt-crop-meta">
+                              {item.variety} · {item.grade}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="mkt-price">
-                        <div className="mkt-price-main">
-                          ₹{Number(item.modal_price).toLocaleString("en-IN")}
+                      </td>
+                      <td>
+                        <div className="mkt-price">
+                          <div className="mkt-price-main">
+                            ₹{Number(item.modal_price).toLocaleString("en-IN")}
+                          </div>
+                          <div className="mkt-price-unit">per quintal</div>
                         </div>
-                        <div className="mkt-price-unit">per quintal</div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="mkt-market-name">{item.market}</div>
-                      <div className="mkt-market-dist">{item.district}</div>
-                    </td>
-                    <td>
-                      <span className="mkt-state-badge">{item.state}</span>
-                    </td>
-                    <td>
-                      <div className="mkt-range">
-                        ₹{Number(item.min_price).toLocaleString("en-IN")}
-                        <span className="mkt-range-sep">–</span>
-                        ₹{Number(item.max_price).toLocaleString("en-IN")}
-                      </div>
-                    </td>
-                    <td>
-                      <div className="mkt-date">{item.arrival_date || "—"}</div>
-                    </td>
-                  </tr>
-                ))
+                      </td>
+                      <td>
+                        <div className="mkt-market-name">{item.market}</div>
+                        <div className="mkt-market-dist">{item.district}</div>
+                      </td>
+                      <td>
+                        <span className="mkt-state-badge">{item.state}</span>
+                      </td>
+                      <td>
+                        <div className="mkt-range">
+                          ₹{Number(item.min_price).toLocaleString("en-IN")}
+                          <span className="mkt-range-sep">–</span>₹
+                          {Number(item.max_price).toLocaleString("en-IN")}
+                        </div>
+                      </td>
+                      <td>
+                        <div className="mkt-date">
+                          {item.arrival_date || "—"}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                  {visible < filteredData.length && (
+                    <tr>
+                      <td colSpan={6} style={{ textAlign: "center" }}>
+                        <button
+                          className="view-more-btn"
+                          onClick={() => setVisible((prev) => prev + 10)}
+                        >
+                          View More
+                        </button>
+                      </td>
+                    </tr>
+                  )}
+                </>
               )}
             </tbody>
           </table>
         </div>
 
         <div className="mkt-footer">
-          Data sourced from data.gov.in · Ministry of Agriculture &amp; Farmers Welfare · Prices in ₹ / quintal
+          Data sourced from data.gov.in · Ministry of Agriculture &amp; Farmers
+          Welfare · Prices in ₹ / quintal
         </div>
       </div>
     </div>

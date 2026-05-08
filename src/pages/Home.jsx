@@ -194,8 +194,8 @@ function Home() {
       </section>
 
       {/* ── Features ── */}
-      <section className="features-section container py-16 px-6">
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
+      <section className="features-section  w-full  px-10 py-10">
+        <div className="max-w-7xl mx-auto px-6" style={{ textAlign: "center", marginBottom: 48 }}>
           <div className="section-eyebrow" style={{ display: "inline-flex", marginBottom: 14 }}>
             <span className="section-eyebrow-dot" />
             Why FarmDirect
@@ -233,6 +233,8 @@ function Home() {
         </div>
       </section>
 
+
+     
     </div>
   );
 }

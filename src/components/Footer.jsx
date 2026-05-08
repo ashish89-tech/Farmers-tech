@@ -46,7 +46,7 @@ function Footer() {
     <footer className="ft">
 
       {/* ── CTA Banner ── */}
-      <div className="ft-cta">
+      {/* <div className="ft-cta">
         <div className="ft-cta-text">
           Farm-fresh produce, <span>direct to your door.</span> No middlemen.
         </div>
@@ -58,7 +58,7 @@ function Footer() {
             <button className="ft-btn-secondary">Sell on FarmDirect</button>
           </Link>
         </div>
-      </div>
+      </div> */}
 
       {/* ── Main Grid ── */}
       <div className="ft-main">

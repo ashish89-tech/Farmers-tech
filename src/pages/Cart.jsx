@@ -18,6 +18,45 @@ const Cart = () => {
   );
   const fee = subtotal * 0.05;
   const total = subtotal + fee;
+const payNow = async () => {
+
+  const response = await fetch("http://localhost:5000/create-order", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      amount: total,
+    }),
+  });
+
+  const order = await response.json();
+
+  const options = {
+    key: "rzp_test_SmOsP8gPuczQwQ",
+    amount: order.amount,
+    currency: "INR",
+    name: "Farmers Marketplace",
+    description: "Order Payment",
+    order_id: order.id,
+
+    handler: function (response) {
+
+      alert("Payment Successful!");
+
+      console.log(response);
+
+    },
+
+    theme: {
+      color: "#16a34a",
+    },
+  };
+
+  const rzp = new window.Razorpay(options);
+
+  rzp.open();
+};
 
   return (
     <div className="container" style={{ padding: "3rem 1.5rem" }}>
@@ -181,6 +220,7 @@ const Cart = () => {
             <button
               className="btn btn-primary"
               style={{ width: "100%", padding: "1rem" }}
+              onClick={payNow}
             >
               <CreditCard size={20} />
               Proceed to Checkout

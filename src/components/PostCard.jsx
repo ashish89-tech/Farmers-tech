@@ -4,11 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
 import "./PostCard.css";
 import { addToCart } from "../store/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { adjustPrice, resetPrice } from "../store/priceSlice";
+
 
 function PostCard({ $id, title, content, feturedImage, farmName, price, category, image }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const priceMultiplier = useSelector((state) => state.price.multiplier);
 
   return (
     <Link to={`/post/${$id}`} className="pc-link">
@@ -33,7 +36,7 @@ function PostCard({ $id, title, content, feturedImage, farmName, price, category
           )}
 
           <div className="pc-price-badge">
-            ₹{price}
+             ₹{(price * priceMultiplier).toFixed(2)}
             <span className="pc-price-unit">/box</span>
           </div>
         </div>

@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import { PlusCircle, Package, IndianRupee, TrendingUp } from "lucide-react";
 import "./DashBoard.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import service from "../appwrite/config.js";
+import Weather from "../components/Weather.jsx";
+import { adjustPrice, resetPrice } from "../store/priceSlice";
 
 const DashBoard = () => {
-  const navigate  = useNavigate();
-  const userData  = useSelector((state) => state.auth.userData);
-  const [posts, setPosts]     = useState([]);
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.auth.userData);
+  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const priceMultiplier = useSelector((state) => state.price.multiplier);
 
   useEffect(() => {
     if (userData?.$id) {
@@ -18,7 +22,7 @@ const DashBoard = () => {
         .then((res) => {
           if (res) {
             const myPosts = res.documents.filter(
-              (post) => post.userId === userData.$id
+              (post) => post.userId === userData.$id,
             );
             setPosts(myPosts);
           }
@@ -27,11 +31,19 @@ const DashBoard = () => {
     }
   }, [userData]);
 
-  const totalRevenue = posts.reduce((acc, post) => acc + (post.price || 0), 0);
+  
+  
+  const totalRevenue = posts.reduce(
+    (acc, post) => acc + (post.price * priceMultiplier || 0),
+    0,
+  );
+
+  
+
+  
 
   return (
     <div className="dashboard-root">
-
       {/* ── Hero Header ── */}
       <div className="db-hero">
         <div className="db-hero-inner">
@@ -47,18 +59,13 @@ const DashBoard = () => {
               Welcome back, {userData?.name || "Farmer"} 👋
             </p>
           </div>
-          <button
-            className="db-add-btn"
-            onClick={() => navigate("/add-post")}
-          >
+          <button className="db-add-btn" onClick={() => navigate("/add-post")}>
             <PlusCircle size={18} />
             Add New Product
           </button>
         </div>
       </div>
-
       <div className="db-body">
-
         {/* ── Stat Cards ── */}
         <div className="db-stats">
           <div className="db-stat-card">
@@ -149,7 +156,9 @@ const DashBoard = () => {
                       </span>
                     </td>
                     <td>
-                      <span className="db-price">₹{post.price}</span>
+                      <span className="db-price">
+                        ₹{(post.price * priceMultiplier).toFixed(2)}
+                      </span>
                     </td>
                     <td>
                       <span className={`db-status ${post.status}`}>
@@ -171,6 +180,10 @@ const DashBoard = () => {
           </table>
         </div>
       </div>
+      <Weather
+      onPriceAdjust={(delta) => dispatch(adjustPrice(delta))}
+      onReset={() => dispatch(resetPrice())}
+    />
     </div>
   );
 };

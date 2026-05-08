@@ -6,6 +6,8 @@ import "./AllPosts.css";
 import tomatoImg from "../assets/download.jpeg";
 import wheatImg from "../assets/bengan.jpg";
 import mangoImg from "../assets/corn.jpeg";
+import { useSelector } from "react-redux";
+import { adjustPrice, resetPrice } from "../store/priceSlice";
 
 const CATEGORIES = [
   { key: "all",       label: "All",        icon: "🌿" },
@@ -56,6 +58,7 @@ const dummyPosts = [
 export default function AllPosts() {
   const [posts, setPosts]         = useState([]);
   const [activecat, setActivecat] = useState("all");
+  const priceMultiplier = useSelector((state) => state.price.multiplier);
 
   useEffect(() => {
     appwriteService.getPosts([]).then((res) => {

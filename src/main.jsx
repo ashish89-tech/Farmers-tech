@@ -16,6 +16,7 @@ import AllPosts from "./pages/AllPosts"
 import DashBoard from './pages/DashBoard.jsx'
 import Cart from './pages/Cart.jsx'
 import MarketTable from './pages/MarketPrice.jsx'
+import Setting from './pages/setting.jsx'
 
 const router = createBrowserRouter([
   {
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
         {
             path: "/marketprice",
             element: (
-                <AuthLayout authentication>
+                <AuthLayout authentication >
                     <MarketTable />
                 </AuthLayout>
             ),
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
         {
             path: "/post/:slug",
             element: <Post />,
+        },
+        {
+            path: "/setting",
+            element: <Setting />,
         },
     ],
   },
